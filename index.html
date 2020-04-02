@@ -2,163 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Simple HTML Document</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Restriccion en Costa Rica</title>
+    <link rel="stylesheet" href="css/styles.css">
+	<script type="text/javascript" src="js/scripts.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<style>
-		ul {list-style-type: none;}
-		body {font-family: Verdana, sans-serif;}
-
-		/* Month header */
-		.month {
-		  padding: 20px 25px;
-		  width: 100%;
-		  background: #1abc9c;
-		  text-align: center;
-		}
-
-		/* Month list */
-		.month ul {
-		  margin: 0;
-		  padding: 0;
-		}
-
-		.month ul li {
-		  color: white;
-		  font-size: 20px;
-		  text-transform: uppercase;
-		  letter-spacing: 3px;
-		}
-
-		/* Previous button inside month header */
-		.month .prev {
-		  float: left;
-		  padding-top: 10px;
-		}
-
-		/* Next button */
-		.month .next {
-		  float: right;
-		  padding-top: 10px;
-		}
-
-		/* Weekdays (Mon-Sun) */
-		.weekdays {
-		  margin: 0;
-		  padding: 10px 0;
-		  background-color:#ddd;
-		}
-
-		.weekdays li {
-		  display: inline-block;
-		  width: 13.6%;
-		  color: #666;
-		  text-align: center;
-		}
-
-		/* Days (1-31) */
-		.days {
-		  padding: 10px 0;
-		  background: #eee;
-		  margin: 0;
-		}
-
-		.days li {
-		  list-style-type: none;
-		  display: inline-block;
-		  width: 13.6%;
-		  text-align: center;
-		  margin-bottom: 5px;
-		  font-size:12px;
-		  color: #777;
-		}
-
-		/* Highlight the "current" day */
-		.days li .active {
-		  padding: 5px;
-		  background: #1abc9c;
-		  color: white !important
-		}
-	</style>
 </head>
 <body>
     <h1>Restriccion por Placas:</h1>
 	<p>
-	Placa termina en: <input type="text"/>
+	Placa termina en: <!--input type="text"/-->
+	<select id="placa" onchange="change(this)">
+	  <option value="11">Buscar terminacion de placa</option>
+	  <option value="0">0</option>
+	  <option value="1">1</option>
+	  <option value="2">2</option>
+	  <option value="3">3</option>
+	  <option value="4">4</option>
+	  <option value="5">5</option>
+	  <option value="6">6</option>
+	  <option value="7">7</option>
+	  <option value="8">8</option>
+	  <option value="9">9</option>
+	</select>
 	<hr>
 	<p>
-	<script>	
-		var placa0 = {4:"D",6:"D",9:"F",10:"F",11:"F",12:"F"};
-		var placa1 = {5:"D",7:"D",9:"D",10:"D",11:"D",12:"D"};
-		var placa2 = {4:"D",6:"D",8:"D",9:"D",10:"D",11:"D",12:"D"};
-		var placa3 = {5:"D",7:"D",8:"D",10:"D",11:"D",12:"D"};
-		var placa4 = {4:"D",6:"D",8:"D",9:"D",11:"D",12:"D"};
-		var placa5 = {5:"D",7:"D",8:"D",9:"D",11:"D",12:"D"};
-		var placa6 = {4:"D",6:"D",8:"D",9:"D",10:"D",12:"D"};
-		var placa7 = {5:"D",7:"D",8:"D",9:"D",10:"D",12:"D"};
-		var placa8 = {4:"D",6:"D",8:"D",9:"D",10:"D",11:"D"};
-		var placa9 = {5:"D",7:"D",8:"D",9:"D",10:"D",11:"D"};
-			
-		var placas = [0,1,2,3,4,5,6,7,8,];
-		placas[0] = placa0;
-		placas[1] = placa1;
-		placas[2] = placa2;
-		placas[3] = placa3;
-		placas[4] = placa4;
-		placas[5] = placa5;
-		placas[6] = placa6;
-		placas[7] = placa7;
-		placas[8] = placa8;
-		placas[9] = placa9;
-				
-		var weekday = ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"];
-		$.each( placas, function( key, value ) {
-			  document.write( "<div  id='k_" + key+ "'>");
-			  
-			  $.each( value, function( key2, value2 ) {
-				
-				var date = new Date('04/' + key2 + '/2020');
-				document.write("</br>");
-				document.write(weekday[date.getDay()] + " " + key2 + " de Abril" );
-				
-				if (parseInt(key2) <=7) {
-					document.write(":<span style='background-color:yellow'>DIURNA</span>");
-					
-				} else {
-					document.write(":<span style='background-color:lightblue'>TODO EL DIA</span>");
-					
-				}
-			  });
-			  document.write( "</div>" );
-			  
-			});
-		document.write( "<br>");
-		document.write( "<hr>");
-		document.write( "<br>");
-		document.write("<span style='background-color:yellow'>DIURNA: 5am a 5pm</span></br>");
-	    document.write("<span style='background-color:lightblue'>TODO EL DIA: 24 horas</span>");
-		
-		$('div').hide();
-		
-		$("input").keyup(function(){
-		  $('[id^=k_]').hide();
-		  
-		  $( "#k_"+this.value ).show();
-		  $( "#calendario" ).show();
-		  
-		  $("[id^=d_]").css('background-color', '#eee');
-		  
-		  $.each( placas[this.value], function( key, value ) {
-			  if (parseInt(key) <=7) {
-					$('#d_' + key).css('background-color', 'yellow');
-				} else {
-					$('#d_' + key).css('background-color', 'lightgray');
-				}
-		  });
-		});
-	</script>
+	<div id="list">
+	</div>
 	</p>
-	
 	<div id="calendario">
 		<div class="month">
 		  <ul>
@@ -203,5 +73,8 @@
 		  <li id="d_19">19</li>
 		</ul>
 	</div>
+	<script>
+		generateCalendar();
+	</script>
 </body>
 </html>
