@@ -9,6 +9,9 @@
 <body>
     <h1>Restriccion por Placas:</h1>
 	<p>
+	Placa termina en: <input type="text"/>
+	<hr>
+	<p>
 	<script>	
 		var placa0 = {4:"D",6:"D",9:"F",10:"F",11:"F",12:"F"};
 		var placa1 = {5:"D",7:"D",9:"D",10:"D",11:"D",12:"D"};
@@ -32,23 +35,38 @@
 		placas[7] = placa7;
 		placas[8] = placa8;
 		placas[9] = placa9;
-		
-
-		document.write( "<ul>");
+				
+		var weekday = ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"];
 		$.each( placas, function( key, value ) {
-			  document.write( "<li>Terminacion: " + key);
-			  document.write( "<ul>");
+			  document.write( "<div  id='k_" + key+ "'>");
+			  
 			  $.each( value, function( key2, value2 ) {
-				document.write("<li>Abril: " + key2);
-				if (parseInt(key2) <=7)
-					document.write(": DIURNA </li>");
-				else 
-					document.write(": TODO EL DIA </li>");
+				
+				var date = new Date('04/' + key2 + '/2020');
+				document.write("</br>");
+				document.write(weekday[date.getDay()] + " " + key2 + " de Abril" );
+				
+				if (parseInt(key2) <=7) {
+					document.write(":<span style='background-color:yellow'>DIURNA</span>");
+				} else {
+					document.write(":<span style='background-color:lightblue'>TODO EL DIA</span>");
+				}
 			  });
-			  document.write( "</ul>");
-			  document.write( "</li>" );
+			  document.write( "</div>" );
+			  
 			});
-		document.write( "</ul>");
+		document.write( "<br>");
+		document.write( "<hr>");
+		document.write( "<br>");
+		document.write("<span style='background-color:yellow'>DIURNA: 5am a 5pm</span></br>");
+	    document.write("<span style='background-color:lightblue'>TODO EL DIA: 24 horas</span>");
+		
+		$('div').hide();
+		
+		$("input").keyup(function(){
+		  $('div').hide();
+		  $( "#k_"+this.value ).show();
+		});
 	</script>
 	</p>
 </body>
