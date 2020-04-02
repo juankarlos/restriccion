@@ -4,9 +4,52 @@
     <meta charset="utf-8">
     <title>Simple HTML Document</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/jquery-1.11.3.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-    <h1>Hello, World!</h1>
+    <h1>Restriccion por Placas:</h1>
+	<p>
+	<script>	
+		var placa0 = {4:"D",6:"D",9:"F",10:"F",11:"F",12:"F"};
+		var placa1 = {5:"D",7:"D",9:"D",10:"D",11:"D",12:"D"};
+		var placa2 = {4:"D",6:"D",8:"D",9:"D",10:"D",11:"D",12:"D"};
+		var placa3 = {5:"D",7:"D",8:"D",10:"D",11:"D",12:"D"};
+		var placa4 = {4:"D",6:"D",8:"D",9:"D",11:"D",12:"D"};
+		var placa5 = {5:"D",7:"D",8:"D",9:"D",11:"D",12:"D"};
+		var placa6 = {4:"D",6:"D",8:"D",9:"D",10:"D",11:"D"};
+		var placa7 = {5:"D",7:"D",8:"D",9:"D",10:"D",12:"D"};
+		var placa8 = {4:"D",6:"D",8:"D",9:"D",10:"D",11:"D"};
+		var placa9 = {5:"D",7:"D",8:"D",9:"D",10:"D",11:"D"};
+			
+		var placas = [0,1,2,3,4,5,6,7,8,];
+		placas[0] = placa0;
+		placas[1] = placa1;
+		placas[2] = placa2;
+		placas[3] = placa3;
+		placas[4] = placa4;
+		placas[5] = placa5;
+		placas[6] = placa6;
+		placas[7] = placa7;
+		placas[8] = placa8;
+		placas[9] = placa9;
+		
+
+		document.write( "<ul>");
+		$.each( placas, function( key, value ) {
+			  document.write( "<li>Terminacion: " + key);
+			  document.write( "<ul>");
+			  $.each( value, function( key2, value2 ) {
+				document.write("<li>Abril: " + key2);
+				if (parseInt(key2) <=7)
+					document.write(": DIURNA </li>");
+				else 
+					document.write(": TODO EL DIA </li>");
+			  });
+			  document.write( "</ul>");
+			  document.write( "</li>" );
+			});
+		document.write( "</ul>");
+	</script>
+	</p>
 </body>
 </html>
